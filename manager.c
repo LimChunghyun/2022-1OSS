@@ -266,6 +266,30 @@ int SearchProductDelivery(Product *product, int size)
     return 0;
 }
 
+int SaveFile(Product *product, int size)
+{
+	if(isProductNull(product, size) ==1)
+	{
+		return -1;
+	}
+	FILE* stream;
+
+	stream = fopen("product.txt", "w");
+
+	for(int i =0; i<size; i++)
+	{
+		if (product[i].order == -1)
+		{
+			continue;
+		}
+
+		fprintf(stream, "%s %s %s %d %s %d %d\n", product[i].name, product[i].explanation, product[i].weight, product[i].benefit, product[i].origin, product[i].price, product[i].methodDelivery);
+	}
+
+	fclose(stream);
+	return 0;
+}	
+
 int isProductNull(Product *product, int size)
 {
     int nullCount = 0;
@@ -300,6 +324,7 @@ int SelectMenu()
     printf("5. 제품 이름으로 검색\n");
     printf("6. 제품 가격으로 검색\n");
     printf("7. 제품 배송 방법으로 검색\n");
+    printf("8. 파일 저장\n");
     printf("0. 종료\n\n");
     printf("=> 원하는 메뉴는? ");
     scanf("%d", &menu);

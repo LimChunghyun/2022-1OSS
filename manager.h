@@ -23,3 +23,4 @@ int SearchProductPrice(Product *product, int size);
 int SearchProductDelivery(Product *product, int size);
 int SelectMenu();
 int isProductNull(Product *product, int size);
+int SaveFile(Product* product, int size);
