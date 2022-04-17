@@ -283,7 +283,7 @@ int SaveFile(Product *product, int size)
 			continue;
 		}
 
-		fprintf(stream, "%s %s %s %d %s %d %d\n", product[i].name, product[i].explanation, product[i].weight, product[i].benefit, product[i].origin, product[i].price, product[i].methodDelivery);
+		fprintf(stream, "%s, %s, %s, %d, %s, %d, %d\n", product[i].name, product[i].explanation, product[i].weight, product[i].benefit, product[i].origin, product[i].price, product[i].methodDelivery);
 	}
 
 	fclose(stream);
