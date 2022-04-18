@@ -28,7 +28,48 @@ int ReadFile(Product product[], int size)
     }
     return size;
 }
-int ReadProduct(Product *product, int size)
+
+int ReadProductDetail(Product *product, int size)
+{
+    if (isProductNull(product, size) == 1)
+    {
+        return -1;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        if (product[i].order == -1)
+        {
+#ifdef DEBUG
+            printf("DEBUG)삭제되어 비어있는 번호: array[%d]: %d번\n", i, i+1);
+
+#endif
+            continue;
+        }
+
+        printf("[%d]번:\n", product[i].order);
+        printf("\n상세 내용 화면 >>\n");
+        printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
+        printf("%s\n\n", product[i].explanation);
+        printf("%d원\n", product[i].price);
+        printf("구매혜택 회원 적립금:     +%d원\n", product[i].benefit);
+        printf("원산지 %25s\n", product[i].origin);
+        printf("판매단위%25s\n", product[i].weight);
+
+        if (product[i].methodDelivery == 1)
+        {
+            printf("배송방법                새벽배송\n");
+        }
+        else
+        {
+            printf("배송방법                택배배송\n");
+        }
+        printf("--------------------------------------\n\n");
+    }
+    return 0;
+}
+
+int ReadProductSummary(Product *product, int size)
 {
     if (isProductNull(product, size) == 1)
     {
@@ -50,23 +91,15 @@ int ReadProduct(Product *product, int size)
         printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
         printf("%s\n", product[i].explanation);
         printf("%d원\n", product[i].price);
-        printf("--------------------------------------\n");
-        printf("\n상세 내용 화면 >>\n");
-        printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
-        printf("%s\n\n", product[i].explanation);
-        printf("%d원\n", product[i].price);
-        printf("구매혜택 회원 적립금:     +%d원\n", product[i].benefit);
-        printf("원산지 %25s\n", product[i].origin);
-        printf("판매단위%25s\n", product[i].weight);
-
         if (product[i].methodDelivery == 1)
         {
-            printf("배송방법                새벽배송\n");
+            printf("새벽배송\n");
         }
         else
         {
-            printf("배송방법                택배배송\n");
+            printf("택배배송\n");
         }
+        printf("--------------------------------------\n\n");
     }
     return 0;
 }
