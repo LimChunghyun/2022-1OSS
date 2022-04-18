@@ -65,7 +65,7 @@ int ReadProduct(Product *product, int size)
             printf("----------------------------------------------------------\n\n");
         }
         break;
-        
+
     case 2:
         for (int i = 0; i < size; i++)
         {
@@ -247,6 +247,11 @@ int SearchProductName(Product *product, int size)
             continue;
         }
 
+        if (product[i].order == -1)
+        {
+            continue;
+        }
+
         printf("[%d]번:\n", product[i].order);
         printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
         printf("%s\n", product[i].explanation);
@@ -285,6 +290,10 @@ int SearchProductPrice(Product *product, int size)
 
         for (int i = 0; i < size; i++)
         {
+            if (product[i].order == -1)
+            {
+                continue;
+            }
             if (product[i].price >= standardPrice)
             {
                 printf("[%d]번:\n", product[i].order);
@@ -307,8 +316,12 @@ int SearchProductPrice(Product *product, int size)
         printf("검색 금액을 입력해주십시오: ");
         scanf("%d", &standardPrice);
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < size; i++)
         {
+            if (product[i].order == -1)
+            {
+                continue;
+            }
             if (product[i].price <= standardPrice)
             {
                 printf("[%d]번:\n", product[i].order);
@@ -351,8 +364,13 @@ int SearchProductDelivery(Product *product, int size)
     }
 
     int searchedCount = 0;
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < size; i++)
     {
+        if (product[i].order == -1)
+        {
+            continue;
+        }
+
         if (product[i].methodDelivery == select)
         {
             printf("[%d]번:\n", product[i].order);
@@ -374,7 +392,7 @@ int SearchProductDelivery(Product *product, int size)
 
 int SaveFile(Product *product, int size)
 {
-    int returnValue =0;
+    int returnValue = 0;
     if (isProductNull(product, size) == 1)
     {
         returnValue = -1;
