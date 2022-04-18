@@ -11,7 +11,8 @@ int main(void)
     }
 
     int menu;
-    int count = 0;
+    int count = ReadFile(product, 0);
+
     while (1)
     {
         menu = SelectMenu();
@@ -151,21 +152,6 @@ int main(void)
                 printf("->검색됨\n");
             }
         }
-	else if(menu ==8)
-	{
-		int returnValue = SaveFile(product, count);
-		if(returnValue == -1)
-		{
-			printf("등록된 제품이 없으므로 파일로 저장하실 수 없습니다.");
-		}
-
-		else if(returnValue ==0)
-		{
-			printf("->저장됨\n");
-		}
-
-	}
-
     }
 
     printf("종료됨!\n");

@@ -2,6 +2,32 @@
 #include <string.h>
 #include "manager.h"
 
+int ReadFile(Product product[], int size)
+{
+    FILE *stream;
+    if ((stream = fopen("product.txt", "r")) == NULL)
+    {
+        return -1;
+    }
+
+    else
+    {
+        while (1)
+        {
+            if (fscanf(stream, "%[^,], %[^,], %[^,], %d, %[^,], %d, %d\n", product[size].name, product[size].explanation, product[size].weight, &product[size].benefit, product[size].origin, &product[size].price, &product[size].methodDelivery) != -1)
+            {
+                product[size].order = size + 1;
+                size++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        fclose(stream);
+    }
+    return size;
+}
 int ReadProduct(Product *product, int size)
 {
     if (isProductNull(product, size) == 1)
