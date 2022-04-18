@@ -374,9 +374,10 @@ int SearchProductDelivery(Product *product, int size)
 
 int SaveFile(Product *product, int size)
 {
+    int returnValue =0;
     if (isProductNull(product, size) == 1)
     {
-        return -1;
+        returnValue = -1;
     }
     FILE *stream;
 
@@ -393,7 +394,7 @@ int SaveFile(Product *product, int size)
     }
 
     fclose(stream);
-    return 0;
+    return returnValue;
 }
 
 int isProductNull(Product *product, int size)

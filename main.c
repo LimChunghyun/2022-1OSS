@@ -175,7 +175,7 @@ int main(void)
 
             if(returnValue == -1)
             {
-                printf("등록된 제품이 없으므로 파일로 저장하실 수 없습니다.\n");
+                printf("등록된 제품이 없으므로 빈 파일이 저장되었습니다.\n");
             }
 
             else if (returnValue == 0)
