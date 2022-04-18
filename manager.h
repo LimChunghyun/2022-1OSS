@@ -14,8 +14,7 @@ typedef struct
 // When functions operate unnormally(read, delete, update, search when the data does not exist and add data when the data exist), they return -1
 // The search functions returns -2 if the condition is not met
 // if canceled during functions operation, they return -3
-int ReadProductDetail(Product *product, int size);
-int ReadProductSummary(Product *product, int size);
+int ReadProduct(Product *product, int size);
 int AddProduct(Product *product, int size);
 int UpdateProduct(Product *product, int selectNum); // The number of the product to be modified is determined within the function.
 int DeleteProduct(Product *product, int selectNum); // The number of the product to be deleted is determined within the function.

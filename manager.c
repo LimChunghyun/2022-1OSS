@@ -29,6 +29,78 @@ int ReadFile(Product product[], int size)
     return size;
 }
 
+int ReadProduct(Product *product, int size)
+{
+    if (isProductNull(product, size) == 1)
+    {
+        return -1;
+    }
+
+    int readMethod = 0;
+    printf("어떤 방식으로 조회하시겠습니까? (1. 요약 2. 상세), 그외: 취소");
+    scanf("%d", &readMethod);
+
+    switch (readMethod)
+    {
+    case 1:
+        for (int i = 0; i < size; i++)
+        {
+            if (product[i].order == -1)
+            {
+                continue;
+            }
+
+            printf("[%d]번:\n", product[i].order);
+            printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
+            printf("%s\n", product[i].explanation);
+            printf("%d원\n", product[i].price);
+            if (product[i].methodDelivery == 1)
+            {
+                printf("새벽배송\n");
+            }
+            else
+            {
+                printf("택배배송\n");
+            }
+            printf("----------------------------------------------------------\n\n");
+        }
+        break;
+        
+    case 2:
+        for (int i = 0; i < size; i++)
+        {
+            if (product[i].order == -1)
+            {
+                continue;
+            }
+
+            printf("[%d]번:\n", product[i].order);
+            printf("\n상세 내용 화면 >>\n");
+            printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
+            printf("%s\n\n", product[i].explanation);
+            printf("%d원\n", product[i].price);
+            printf("구매혜택 회원 적립금:     +%d원\n", product[i].benefit);
+            printf("원산지 %25s\n", product[i].origin);
+            printf("판매단위%25s\n", product[i].weight);
+
+            if (product[i].methodDelivery == 1)
+            {
+                printf("배송방법                새벽배송\n");
+            }
+            else
+            {
+                printf("배송방법                택배배송\n");
+            }
+            printf("----------------------------------------------------------\n\n");
+        }
+        break;
+    default:
+        return -3;
+    }
+
+    return 0;
+}
+
 int ReadProductDetail(Product *product, int size)
 {
     if (isProductNull(product, size) == 1)
@@ -41,7 +113,7 @@ int ReadProductDetail(Product *product, int size)
         if (product[i].order == -1)
         {
 #ifdef DEBUG
-            printf("DEBUG)삭제되어 비어있는 번호: array[%d]: %d번\n", i, i+1);
+            printf("DEBUG)삭제되어 비어있는 번호: array[%d]: %d번\n", i, i + 1);
 
 #endif
             continue;
@@ -76,31 +148,6 @@ int ReadProductSummary(Product *product, int size)
         return -1;
     }
 
-    for (int i = 0; i < size; i++)
-    {
-        if (product[i].order == -1)
-        {
-#ifdef DEBUG
-            printf("DEBUG)삭제되어 비어있는 번호: array[%d]: %d번\n", i, i+1);
-
-#endif
-            continue;
-        }
-
-        printf("[%d]번:\n", product[i].order);
-        printf("[%s] %s %s\n", product[i].origin, product[i].name, product[i].weight);
-        printf("%s\n", product[i].explanation);
-        printf("%d원\n", product[i].price);
-        if (product[i].methodDelivery == 1)
-        {
-            printf("새벽배송\n");
-        }
-        else
-        {
-            printf("택배배송\n");
-        }
-        printf("--------------------------------------\n\n");
-    }
     return 0;
 }
 
@@ -327,27 +374,27 @@ int SearchProductDelivery(Product *product, int size)
 
 int SaveFile(Product *product, int size)
 {
-	if(isProductNull(product, size) ==1)
-	{
-		return -1;
-	}
-	FILE* stream;
+    if (isProductNull(product, size) == 1)
+    {
+        return -1;
+    }
+    FILE *stream;
 
-	stream = fopen("product.txt", "w");
+    stream = fopen("product.txt", "w");
 
-	for(int i =0; i<size; i++)
-	{
-		if (product[i].order == -1)
-		{
-			continue;
-		}
+    for (int i = 0; i < size; i++)
+    {
+        if (product[i].order == -1)
+        {
+            continue;
+        }
 
-		fprintf(stream, "%s, %s, %s, %d, %s, %d, %d\n", product[i].name, product[i].explanation, product[i].weight, product[i].benefit, product[i].origin, product[i].price, product[i].methodDelivery);
-	}
+        fprintf(stream, "%s, %s, %s, %d, %s, %d, %d\n", product[i].name, product[i].explanation, product[i].weight, product[i].benefit, product[i].origin, product[i].price, product[i].methodDelivery);
+    }
 
-	fclose(stream);
-	return 0;
-}	
+    fclose(stream);
+    return 0;
+}
 
 int isProductNull(Product *product, int size)
 {

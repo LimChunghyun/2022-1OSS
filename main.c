@@ -31,29 +31,18 @@ int main(void)
         }
         if (menu == 1)
         {
-            int readMethod = 0;
-            printf("어떤 방식으로 조회하시겠습니까? (1. 요약 2. 상세), 그외: 취소");
-            scanf("%d", &readMethod);
-
-            switch (readMethod)
+            int returnValue = ReadProduct(product, count);
+            if (returnValue == -1)
             {
-            case 1:
-                int returnValue = ReadProductSummary(product, count);
-                if (returnValue == -1)
-                {
-                    printf("등록된 제품이 없으므로 제품을 확인하실 수 없습니다.\n");
-                }
-                break;
-            case 2:
-                int returnValue = ReadProductDetail(product, count);
-                if (returnValue == -1)
-                {
-                    printf("등록된 제품이 없으므로 제품을 확인하실 수 없습니다.\n");
-                }
-                break;
-            default:
+                printf("등록된 제품이 없으므로 조회하실 수 없습니다.\n");
+            }
+            else if (returnValue == -3)
+            {
                 printf("조회 도중 취소 되었습니다.\n");
-                break;
+            }
+            else if (returnValue == 0)
+            {
+                printf("->조회됨\n");
             }
         }
 
