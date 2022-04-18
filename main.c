@@ -14,7 +14,7 @@ int main(void)
     int count = ReadFile(product, 0);
     if (count <= 0)
     {
-        printf("파일에 저장된 제품이 없으므로 파일에서 제품을 읽어오지 못했습니다/\n");
+        printf("파일에 저장된 제품이 없으므로 파일에서 제품을 읽어오지 못했습니다.\n");
     }
 
     else

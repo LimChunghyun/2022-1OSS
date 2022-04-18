@@ -1,2 +1,0 @@
-test test, test 123 test, 150g, 158, asdf asdf test, 15800, 1
-test2 test2, as test, 1500봉, 120, asd asdf as test, 15000, 2
